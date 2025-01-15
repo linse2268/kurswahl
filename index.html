@@ -23,7 +23,7 @@
       }
       @media (max-width: 600px) {
         #content {
-          width: 95vw;
+          width: 90vw;
         }
         body {
           font-size: 1em;
@@ -131,10 +131,10 @@
       <h1>Wahlbogen für Klasse 11/12</h1>
       <div id="farbHinweis">
         <p id="eANFächerHinweis">
-          Das ist die Farbe der Kurse mit eAN (erhöhtes Anforderungsniveau).
+          Das ist die farbe der Kurse mit eAN (erhöhtes Anforderungsniveau).
         </p>
         <p id="gANFächerHinweis">
-          Das ist die Farbe der Kurse mit gAN (grundlegendes
+          Das ist die farbe der Kurse mit gAN (grundlegendes
           Anforderungsniveau).
         </p>
       </div>
@@ -553,12 +553,6 @@
               <span class="gAN">Darstellen und Gestalten</span></label
             >
           </div>
-          <div>
-            <label
-              ><input type="radio" name="band12" value="" class="gAN" />
-              <span class="gAN">kein weiteres Fach</span></label
-            >
-          </div>
         </div>
         <div id="prüfenDiv">
           <button type="submit" id="prüfenKnopf">Prüfen</button>
@@ -586,88 +580,28 @@
             const selectedOption = form[`band${i}`]?.value;
             if (selectedOption) {
               if (selected[selectedOption]) {
-                errorMsg = `Das Fach "${selectedOption}" wurde in mehreren Bändern gewählt.`;
-                break;
+                errorMsg += "Doppelte Auswahl erkannt. ";
               }
               selected[selectedOption] = true;
             }
           }
 
-          // Regel: Deutsch und Mathematik -> jeweils einmal mit eAN und gAN
-          const hasDe = selected["DE"] || selected["de"];
-          const hasMa = selected["MA"] || selected["ma"];
-          if (!hasDe || !hasMa) {
-            errorMsg =
-              "Deutsch und Mathematik müssen jeweils einmal gewählt werden (eAN oder gAN).";
-          } else if (!selected["DE"] && !selected["MA"]) {
-            errorMsg =
-              "Entweder Deutsch oder Mathematik muss mit erhöhtem Niveau (eAN) gewählt werden.";
-          }
-
-          // Regel: Religion mit eAN sperrt zusätzliche Gesellschaftswissenschaft mit eAN
-          if (
-            (selected["EVR"] || selected["KAR"]) &&
-            (selected["GE"] ||
-              selected["GG"] ||
-              selected["SK"] ||
-              selected["WR"])
-          ) {
-            errorMsg =
-              "Wenn Religion mit erhöhtem Niveau (eAN) gewählt wird, darf keine weitere Gesellschaftswissenschaft mit eAN gewählt werden.";
-          }
-
-          // Regel: Geschichte -> mindestens in Band 4 oder Band 10
-          if (!selected["GE"] && !selected["ge"]) {
-            errorMsg =
-              "Geschichte muss mindestens einmal gewählt werden (Band 4 oder 10).";
-          }
-
-          // Regel: Kunst oder Musik -> mindestens eines in Band 3
-          if (!selected["KU"] && !selected["MU"] && !selected["DUG"]) {
-            errorMsg =
-              "Es muss mindestens eines der künstlerisch-musischen Fächer (Kunst, Musik, Darstellen und Gestalten) gewählt werden.";
-          }
-
-          // Regel: Sport -> Pflicht
-          if (!selected["SP"]) {
-            errorMsg = "Sport muss gewählt werden.";
-          }
-
-          // Regel: Zwei Aufgabenfelder mit erhöhtem Niveau
-          const eANFächer = Object.keys(selected).filter((fach) =>
-            [
-              "DE",
-              "MA",
-              "EN",
-              "FR",
-              "LA",
-              "GE",
-              "GG",
-              "SK",
-              "WR",
-              "EVR",
-              "KAR",
-              "BI",
-              "CH",
-              "PH",
-            ].includes(fach)
+          // Check if exactly 3 eAN radio buttons are selected
+          const selectedEAN = form.querySelectorAll(
+            'input[type="radio"].eAN:checked'
           );
-          if (eANFächer.length != 3) {
-            errorMsg =
-              "Es dürfen genau drei Aufgabenfelder mit erhöhtem Niveau (eAN) gewählt werden.";
+          if (selectedEAN.length !== 3) {
+            errorMsg += "Es müssen genau 3 eAN-Optionen ausgewählt werden. ";
           }
 
-          // Anzeige der Fehlermeldungen
-          const errorElement = document.getElementById("errorMsg");
-          const successElement = document.getElementById("successMsg");
-
+          // Display error or success message
           if (errorMsg) {
-            errorElement.textContent = errorMsg;
-            successElement.textContent = "";
+            document.getElementById("errorMsg").textContent = errorMsg;
+            document.getElementById("successMsg").textContent = "";
           } else {
-            successMsg = "Die Wahl ist gültig!";
-            errorElement.textContent = "";
-            successElement.textContent = successMsg;
+            successMsg = "Formular erfolgreich eingereicht!";
+            document.getElementById("errorMsg").textContent = "";
+            document.getElementById("successMsg").textContent = successMsg;
           }
         });
     </script>
