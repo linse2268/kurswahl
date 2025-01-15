@@ -6,11 +6,20 @@
     <title>Wahlbogen für Klasse 11/12</title>
     <style>
       /* Grundlegendes Styling */
+      * {
+        --eAN: coral;
+        --gAN: white;
+      }
       body {
         font-family: Arial, sans-serif;
         font-size: 1.3em;
         margin: 20px;
         background-color: rgb(12, 12, 12);
+        display: flex;
+        justify-content: center;
+      }
+      #content {
+        width: 55vw;
       }
       p {
         color: gray;
@@ -18,16 +27,17 @@
       }
       h1 {
         color: white;
+        text-align: center;
       }
       .eAN {
         font-weight: bold;
-        color: lightgreen;
+        color: var(--eAN);
         font-size: 1.35em;
       }
 
       .gAN {
         font-weight: lighter;
-        color: white;
+        color: var(--gAN);
         font-size: 1.35em;
       }
 
@@ -51,313 +61,489 @@
       h3 {
         text-decoration: underline;
         font-weight: lighter;
-        color: rgba(255, 255, 255, 0.8);
+        color: rgb(255, 255, 255);
+      }
+      input[type="radio"] {
+        width: 0.8em;
+        height: 0.8em;
+      }
+      .band {
+        border: 3px solid gray;
+        border-radius: 0.5em;
+        padding: 1em 2em;
+      }
+
+      #prüfenKnopf {
+        padding: 1em 3em;
+        font-size: 1.35em;
+        border-radius: 0.5em;
+        background-color: lightcoral;
+        border: none;
+      }
+      #farbHinweis {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 1em;
+        padding: 0.5em 1em;
+        border: 3px solid gray;
+        border-radius: 0.5em;
+        font-size: 1.5em;
+        text-align: center;
+      }
+      #gANFächerHinweis {
+        color: var(--gAN);
+        margin: 0;
+      }
+      #eANFächerHinweis {
+        color: var(--eAN);
+        margin: 0;
+      }
+      #prüfenDiv {
+        display: flex;
+      }
+      #prüfMessage {
+        padding: 0.5em;
       }
     </style>
   </head>
   <body>
-    <h1>Wahlbogen für Klasse 11</h1>
-    <form id="wahlbogenForm">
-      <!-- Band 1 -->
-      <div class="band">
-        <h3>Band 1: Deutsch/Mathe mit eAN</h3>
-        <label
-          ><input type="radio" name="band1" value="DE" class="eAN" />
-          <span class="eAN">Deutsch</span></label
-        >
-        <label
-          ><input type="radio" name="band1" value="MA" class="eAN" />
-          <span class="eAN">Mathematik</span></label
-        >
+    <div id="content">
+      <h1>Wahlbogen für Klasse 11</h1>
+      <div id="farbHinweis">
+        <p id="eANFächerHinweis">
+          Das ist die farbe der Kurse mit eAN (erhöhtes Anforderungsniveau).
+        </p>
+        <p id="gANFächerHinweis">
+          Das ist die farbe der Kurse mit gAN (grundlegendes
+          Anforderungsniveau).
+        </p>
       </div>
+      <form id="wahlbogenForm">
+        <!-- Band 1 -->
+        <div class="band">
+          <h3>Band 1: Deutsch/Mathe mit eAN</h3>
+          <div>
+            <label
+              ><input type="radio" name="band1" value="DE" class="eAN" />
+              <span class="eAN">Deutsch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band1" value="MA" class="eAN" />
+              <span class="eAN">Mathematik</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 2 -->
-      <div class="band">
-        <h3>Band 2: Fortgeführte Fremdsprache</h3>
-        <label
-          ><input type="radio" name="band2" value="EN" class="eAN" />
-          <span class="eAN">Englisch</span></label
-        >
-        <label
-          ><input type="radio" name="band2" value="EN" class="gAN" />
-          <span class="gAN">Englisch</span></label
-        >
-        <label
-          ><input type="radio" name="band2" value="FR" class="eAN" />
-          <span class="eAN">Französisch</span></label
-        >
-        <label
-          ><input type="radio" name="band2" value="LA" class="eAN" />
-          <span class="eAN">Latein</span></label
-        >
-      </div>
+        <!-- Band 2 -->
+        <div class="band">
+          <h3>Band 2: Fortgeführte Fremdsprache</h3>
+          <div>
+            <label
+              ><input type="radio" name="band2" value="EN" class="eAN" />
+              <span class="eAN">Englisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band2" value="EN" class="gAN" />
+              <span class="gAN">Englisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band2" value="FR" class="eAN" />
+              <span class="eAN">Französisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band2" value="LA" class="eAN" />
+              <span class="eAN">Latein</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 3 -->
-      <div class="band">
-        <h3>Band 3: Künstlerisch-musisches Fach</h3>
-        <label
-          ><input type="radio" name="band3" value="KU" class="gAN" />
-          <span class="gAN">Kunst</span></label
-        >
-        <label
-          ><input type="radio" name="band3" value="MU" class="gAN" />
-          <span class="gAN">Musik</span></label
-        >
-        <label
-          ><input type="radio" name="band3" value="DUG" class="gAN" />
-          <span class="gAN">Darstellen und Gestalten</span></label
-        >
-      </div>
+        <!-- Band 3 -->
+        <div class="band">
+          <h3>Band 3: Künstlerisch-musisches Fach</h3>
+          <div>
+            <label
+              ><input type="radio" name="band3" value="KU" class="gAN" />
+              <span class="gAN">Kunst</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band3" value="MU" class="gAN" />
+              <span class="gAN">Musik</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band3" value="DUG" class="gAN" />
+              <span class="gAN">Darstellen und Gestalten</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 4 -->
-      <div class="band">
-        <h3>Band 4: Gesellschaftswissenschaften</h3>
-        <label
-          ><input type="radio" name="band4" value="GE" class="eAN" />
-          <span class="eAN">Geschichte</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="ge" class="gAN" />
-          <span class="gAN">Geschichte</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="GG" class="eAN" />
-          <span class="eAN">Geografie</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="gg" class="gAN" />
-          <span class="gAN">Geografie</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="SK" class="eAN" />
-          <span class="eAN">Sozialkunde</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="sk" class="gAN" />
-          <span class="gAN">Sozialkunde</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="WR" class="eAN" />
-          <span class="eAN">Wirtschaft und Recht</span></label
-        >
-        <label
-          ><input type="radio" name="band4" value="wr" class="gAN" />
-          <span class="gAN">Wirtschaft und Recht</span></label
-        >
-      </div>
+        <!-- Band 4 -->
+        <div class="band">
+          <h3>Band 4: Gesellschaftswissenschaften</h3>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="GE" class="eAN" />
+              <span class="eAN">Geschichte</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="ge" class="gAN" />
+              <span class="gAN">Geschichte</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="GG" class="eAN" />
+              <span class="eAN">Geografie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="gg" class="gAN" />
+              <span class="gAN">Geografie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="SK" class="eAN" />
+              <span class="eAN">Sozialkunde</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="sk" class="gAN" />
+              <span class="gAN">Sozialkunde</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="WR" class="eAN" />
+              <span class="eAN">Wirtschaft und Recht</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band4" value="wr" class="gAN" />
+              <span class="gAN">Wirtschaft und Recht</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 5 -->
-      <div class="band">
-        <h3>Band 5: Religion</h3>
-        <label
-          ><input type="radio" name="band5" value="KAR" class="eAN" />
-          <span class="eAN">Katholische Religion</span></label
-        >
-        <label
-          ><input type="radio" name="band5" value="kar" class="gAN" />
-          <span class="gAN">Katholische Religion</span></label
-        >
-        <label
-          ><input type="radio" name="band5" value="EVR" class="eAN" />
-          <span class="eAN">Evangelische Religion</span></label
-        >
-        <label
-          ><input type="radio" name="band5" value="evr" class="gAN" />
-          <span class="gAN">Evangelische Religion</span></label
-        >
-      </div>
+        <!-- Band 5 -->
+        <div class="band">
+          <h3>Band 5: Religion</h3>
+          <div>
+            <label
+              ><input type="radio" name="band5" value="KAR" class="eAN" />
+              <span class="eAN">Katholische Religion</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band5" value="kar" class="gAN" />
+              <span class="gAN">Katholische Religion</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band5" value="EVR" class="eAN" />
+              <span class="eAN">Evangelische Religion</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band5" value="evr" class="gAN" />
+              <span class="gAN">Evangelische Religion</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 6 -->
-      <div class="band">
-        <h3>Band 6: Deutsch/Mathe mit gAN</h3>
-        <label
-          ><input type="radio" name="band6" value="DE" class="gAN" />
-          <span class="gAN">Deutsch</span></label
-        >
-        <label
-          ><input type="radio" name="band6" value="MA" class="gAN" />
-          <span class="gAN">Mathematik</span></label
-        >
-      </div>
+        <!-- Band 6 -->
+        <div class="band">
+          <h3>Band 6: Deutsch/Mathe mit gAN</h3>
+          <div>
+            <label
+              ><input type="radio" name="band6" value="DE" class="gAN" />
+              <span class="gAN">Deutsch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band6" value="MA" class="gAN" />
+              <span class="gAN">Mathematik</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 7 -->
-      <div class="band">
-        <h3>Band 7: Naturwissenschaften</h3>
-        <label
-          ><input type="radio" name="band7" value="BI" class="eAN" />
-          <span class="eAN">Biologie</span></label
-        >
-        <label
-          ><input type="radio" name="band7" value="bi" class="gAN" />
-          <span class="gAN">Biologie</span></label
-        >
-        <label
-          ><input type="radio" name="band7" value="CH" class="eAN" />
-          <span class="eAN">Chemie</span></label
-        >
-        <label
-          ><input type="radio" name="band7" value="ch" class="gAN" />
-          <span class="gAN">Chemie</span></label
-        >
-        <label
-          ><input type="radio" name="band7" value="PH" class="eAN" />
-          <span class="eAN">Physik</span></label
-        >
-        <label
-          ><input type="radio" name="band7" value="ph" class="gAN" />
-          <span class="gAN">Physik</span></label
-        >
-      </div>
+        <!-- Band 7 -->
+        <div class="band">
+          <h3>Band 7: Naturwissenschaften</h3>
+          <div>
+            <label
+              ><input type="radio" name="band7" value="BI" class="eAN" />
+              <span class="eAN">Biologie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band7" value="bi" class="gAN" />
+              <span class="gAN">Biologie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band7" value="CH" class="eAN" />
+              <span class="eAN">Chemie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band7" value="ch" class="gAN" />
+              <span class="gAN">Chemie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band7" value="PH" class="eAN" />
+              <span class="eAN">Physik</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band7" value="ph" class="gAN" />
+              <span class="gAN">Physik</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 8 -->
-      <div class="band">
-        <h3>Band 8: Sport</h3>
-        <label
-          ><input type="radio" name="band8" value="SP" class="gAN" />
-          <span class="gAN">Sport</span></label
-        >
-      </div>
+        <!-- Band 8 -->
+        <div class="band">
+          <h3>Band 8: Sport</h3>
+          <div>
+            <label
+              ><input type="radio" name="band8" value="SP" class="gAN" />
+              <span class="gAN">Sport</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 9 -->
-      <div class="band">
-        <h3>Band 9: Sprachliches oder naturwissenschaftliches Fach</h3>
-        <label
-          ><input type="radio" name="band9" value="EN" class="gAN" />
-          <span class="gAN">Englisch</span></label
-        >
-        <label
-          ><input type="radio" name="band9" value="FR" class="gAN" />
-          <span class="gAN">Französisch</span></label
-        >
-        <label
-          ><input type="radio" name="band9" value="LA" class="gAN" />
-          <span class="gAN">Latein</span></label
-        >
-        <label
-          ><input type="radio" name="band9" value="BI" class="gAN" />
-          <span class="gAN">Biologie</span></label
-        >
-        <label
-          ><input type="radio" name="band9" value="CH" class="gAN" />
-          <span class="gAN">Chemie</span></label
-        >
-        <label
-          ><input type="radio" name="band9" value="PH" class="gAN" />
-          <span class="gAN">Physik</span></label
-        >
-        <label
-          ><input type="radio" name="band9" value="IN" class="gAN" />
-          <span class="gAN">Informatik</span></label
-        >
-      </div>
+        <!-- Band 9 -->
+        <div class="band">
+          <h3>Band 9: Sprachliches oder naturwissenschaftliches Fach</h3>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="EN" class="gAN" />
+              <span class="gAN">Englisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="FR" class="gAN" />
+              <span class="gAN">Französisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="LA" class="gAN" />
+              <span class="gAN">Latein</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="BI" class="gAN" />
+              <span class="gAN">Biologie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="CH" class="gAN" />
+              <span class="gAN">Chemie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="PH" class="gAN" />
+              <span class="gAN">Physik</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band9" value="IN" class="gAN" />
+              <span class="gAN">Informatik</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 10 -->
-      <div class="band">
-        <h3>Band 10: Ein weiteres Fach mit Belegungspflicht</h3>
-        <label
-          ><input type="radio" name="band10" value="EN" class="gAN" />
-          <span class="gAN">Englisch</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="FR" class="gAN" />
-          <span class="gAN">Französisch</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="LA" class="gAN" />
-          <span class="gAN">Latein</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="GE" class="gAN" />
-          <span class="gAN">Geschichte</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="GG" class="gAN" />
-          <span class="gAN">Geografie</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="SK" class="gAN" />
-          <span class="gAN">Sozialkunde</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="WR" class="gAN" />
-          <span class="gAN">Wirtschaft und Recht</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="BI" class="gAN" />
-          <span class="gAN">Biologie</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="CH" class="gAN" />
-          <span class="gAN">Chemie</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="PH" class="gAN" />
-          <span class="gAN">Physik</span></label
-        >
-        <label
-          ><input type="radio" name="band10" value="IN" class="gAN" />
-          <span class="gAN">Informatik</span></label
-        >
-      </div>
+        <!-- Band 10 -->
+        <div class="band">
+          <h3>Band 10: Ein weiteres Fach mit Belegungspflicht</h3>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="EN" class="gAN" />
+              <span class="gAN">Englisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="FR" class="gAN" />
+              <span class="gAN">Französisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="LA" class="gAN" />
+              <span class="gAN">Latein</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="GE" class="gAN" />
+              <span class="gAN">Geschichte</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="GG" class="gAN" />
+              <span class="gAN">Geografie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="SK" class="gAN" />
+              <span class="gAN">Sozialkunde</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="WR" class="gAN" />
+              <span class="gAN">Wirtschaft und Recht</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="BI" class="gAN" />
+              <span class="gAN">Biologie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="CH" class="gAN" />
+              <span class="gAN">Chemie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="PH" class="gAN" />
+              <span class="gAN">Physik</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band10" value="IN" class="gAN" />
+              <span class="gAN">Informatik</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 11 -->
-      <div class="band">
-        <h3>Band 11: Seminarfach</h3>
-        <label
-          ><input type="radio" name="band11" value="SEMINAR" class="gAN" />
-          <span class="gAN">Seminarfach</span></label
-        >
-      </div>
+        <!-- Band 11 -->
+        <div class="band">
+          <h3>Band 11: Seminarfach</h3>
+          <div>
+            <label
+              ><input type="radio" name="band11" value="SEMINAR" class="gAN" />
+              <span class="gAN">Seminarfach</span></label
+            >
+          </div>
+        </div>
 
-      <!-- Band 12 -->
-      <div class="band">
-        <h3>Band 12: Wahlfach</h3>
-        <label
-          ><input type="radio" name="band12" value="FR" class="gAN" />
-          <span class="gAN">Französisch</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="LA" class="gAN" />
-          <span class="gAN">Latein</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="GG" class="gAN" />
-          <span class="gAN">Geografie</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="SK" class="gAN" />
-          <span class="gAN">Sozialkunde</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="WR" class="gAN" />
-          <span class="gAN">Wirtschaft und Recht</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="BI" class="gAN" />
-          <span class="gAN">Biologie</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="CH" class="gAN" />
-          <span class="gAN">Chemie</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="PH" class="gAN" />
-          <span class="gAN">Physik</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="IN" class="gAN" />
-          <span class="gAN">Informatik</span></label
-        >
-        <label
-          ><input type="radio" name="band12" value="DUG" class="gAN" />
-          <span class="gAN">Darstellen und Gestalten</span></label
-        >
-      </div>
-      <button type="submit">Prüfen</button>
-      <div id="errorMsg" class="error"></div>
-      <div id="successMsg" class="success"></div>
-    </form>
-<p>diese Website wurde hauptsächlich durch ChatGPT erstellt</p>
+        <!-- Band 12 -->
+        <div class="band">
+          <h3>Band 12: Wahlfach</h3>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="FR" class="gAN" />
+              <span class="gAN">Französisch</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="LA" class="gAN" />
+              <span class="gAN">Latein</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="GG" class="gAN" />
+              <span class="gAN">Geografie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="SK" class="gAN" />
+              <span class="gAN">Sozialkunde</span></label
+            >
+          </div>
+
+          <div>
+            <label
+              ><input type="radio" name="band12" value="WR" class="gAN" />
+              <span class="gAN">Wirtschaft und Recht</span></label
+            >
+          </div>
+
+          <div>
+            <label
+              ><input type="radio" name="band12" value="BI" class="gAN" />
+              <span class="gAN">Biologie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="CH" class="gAN" />
+              <span class="gAN">Chemie</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="PH" class="gAN" />
+              <span class="gAN">Physik</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="IN" class="gAN" />
+              <span class="gAN">Informatik</span></label
+            >
+          </div>
+          <div>
+            <label
+              ><input type="radio" name="band12" value="DUG" class="gAN" />
+              <span class="gAN">Darstellen und Gestalten</span></label
+            >
+          </div>
+        </div>
+        <div id="prüfenDiv">
+          <button type="submit" id="prüfenKnopf">Prüfen</button>
+          <div id="prüfMessage">
+            <div id="errorMsg" class="error"></div>
+            <div id="successMsg" class="success"></div>
+          </div>
+        </div>
+      </form>
+    </div>
     <script>
       document
         .getElementById("wahlbogenForm")
