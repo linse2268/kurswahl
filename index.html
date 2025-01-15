@@ -21,6 +21,18 @@
       #content {
         width: 55vw;
       }
+      @media (max-width: 600px) {
+        #content {
+          width: 90vw;
+        }
+        body {
+          font-size: 1em;
+        }
+        #prüfenDiv {
+          display: flex;
+          flex-direction: column;
+        }
+      }
       p {
         color: gray;
         font-size: 0.6em;
@@ -106,6 +118,7 @@
       }
       #prüfMessage {
         padding: 0.5em;
+        text-align: center;
       }
       #kontaktiert {
         text-align: center;
@@ -115,7 +128,7 @@
   </head>
   <body>
     <div id="content">
-      <h1>Wahlbogen für Klasse 11</h1>
+      <h1>Wahlbogen für Klasse 11/12</h1>
       <div id="farbHinweis">
         <p id="eANFächerHinweis">
           Das ist die farbe der Kurse mit eAN (erhöhtes Anforderungsniveau).
