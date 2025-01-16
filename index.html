@@ -56,11 +56,13 @@
       .error {
         color: red;
         margin-top: 10px;
+        text-align: center;
       }
 
       .success {
-        color: green;
+        color: lightgreen;
         margin-top: 10px;
+        text-align: center;
       }
 
       .band {
@@ -119,6 +121,7 @@
       #prüfMessage {
         padding: 0.5em;
         text-align: center;
+        width: 100%;
       }
       .paragraphElements {
         text-align: center;
@@ -229,7 +232,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band4" value="ge" class="gAN" />
+              ><input type="radio" name="band4" value="GE" class="gAN" />
               <span class="gAN">Geschichte</span></label
             >
           </div>
@@ -241,7 +244,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band4" value="gg" class="gAN" />
+              ><input type="radio" name="band4" value="GG" class="gAN" />
               <span class="gAN">Geografie</span></label
             >
           </div>
@@ -253,7 +256,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band4" value="sk" class="gAN" />
+              ><input type="radio" name="band4" value="SK" class="gAN" />
               <span class="gAN">Sozialkunde</span></label
             >
           </div>
@@ -265,7 +268,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band4" value="wr" class="gAN" />
+              ><input type="radio" name="band4" value="WR" class="gAN" />
               <span class="gAN">Wirtschaft und Recht</span></label
             >
           </div>
@@ -282,7 +285,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band5" value="kar" class="gAN" />
+              ><input type="radio" name="band5" value="KAR" class="gAN" />
               <span class="gAN">Katholische Religion</span></label
             >
           </div>
@@ -294,7 +297,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band5" value="evr" class="gAN" />
+              ><input type="radio" name="band5" value="EVR" class="gAN" />
               <span class="gAN">Evangelische Religion</span></label
             >
           </div>
@@ -328,7 +331,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band7" value="bi" class="gAN" />
+              ><input type="radio" name="band7" value="BI" class="gAN" />
               <span class="gAN">Biologie</span></label
             >
           </div>
@@ -340,7 +343,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band7" value="ch" class="gAN" />
+              ><input type="radio" name="band7" value="CH" class="gAN" />
               <span class="gAN">Chemie</span></label
             >
           </div>
@@ -352,7 +355,7 @@
           </div>
           <div>
             <label
-              ><input type="radio" name="band7" value="ph" class="gAN" />
+              ><input type="radio" name="band7" value="PH" class="gAN" />
               <span class="gAN">Physik</span></label
             >
           </div>
@@ -669,6 +672,37 @@
           document.getElementById("gewählteFächerAnzeige").textContent =
             "Gewählte Fächer: ";
         });
+
+      document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener("change", function () {
+          const form = document.getElementById("wahlbogenForm");
+          const selectedSubjects = {};
+
+          // Collect selected subjects
+          for (let i = 1; i <= 12; i++) {
+            const selectedOption = form[`band${i}`]?.value;
+            if (selectedOption) {
+              selectedSubjects[selectedOption] = form[`band${i}`];
+            }
+          }
+
+          // Update the display of subjects
+          document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+            const subjectValue = radio.value;
+            const label = radio.nextElementSibling;
+
+            if (
+              selectedSubjects[subjectValue] &&
+              selectedSubjects[subjectValue] !== radio &&
+              !radio.checked
+            ) {
+              label.style.textDecoration = "line-through";
+            } else {
+              label.style.textDecoration = "none";
+            }
+          });
+        });
+      });
     </script>
   </body>
 </html>
