@@ -602,6 +602,14 @@
       </p>
     </div>
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(
+          'input[name="band11"][value="SEMINAR"]'
+        ).checked = true;
+        document.querySelector(
+          'input[name="band8"][value="SP"]'
+        ).checked = true;
+      });
       document
         .getElementById("wahlbogenForm")
         .addEventListener("submit", function (e) {
