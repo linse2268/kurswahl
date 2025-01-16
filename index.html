@@ -671,9 +671,12 @@
             }
           }
 
-          // Check if 'Geschichte' is selected anywhere
+          // Check if 'Geschichte' and 'Englisch' is selected anywhere
           if (!selected.GE) {
             errorMsg = "Geschichte muss ausgewählt werden! ";
+          }
+          if (!selected.EN) {
+            errorMsg = "Englisch muss ausgewählt werden! ";
           }
 
           // Display error or success message
