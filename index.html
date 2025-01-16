@@ -120,15 +120,25 @@
         padding: 0.5em;
         text-align: center;
       }
-      #kontaktiert {
+      .paragraphElements {
         text-align: center;
         font-size: 0.8em;
+      }
+      #fächerZusammenfassungDiv {
+        padding: 1em;
+      }
+      .fächerZusammenfassung {
+        text-align: center;
+        font-size: 1em;
+        color: white;
+        font-weight: lighter;
       }
     </style>
   </head>
   <body>
     <div id="content">
       <h1>Wahlbogen für Klasse 11/12</h1>
+      <p class="paragraphElements">von Linus Bös</p>
       <div id="farbHinweis">
         <p id="eANFächerHinweis">
           Das ist die farbe der Kurse mit eAN (erhöhtes Anforderungsniveau).
@@ -562,7 +572,16 @@
           </div>
         </div>
       </form>
-      <p id="kontaktiert">Bitte kontaktiert mich bei Fehlern der Website.</p>
+      <div id="fächerZusammenfassungDiv">
+        <div class="fächerZusammenfassung" id="gewählteFächerAnzeige">
+          Wenn du auf 'Prüfen' klickst, werden hier die gewählten Fächer
+          angezeigt.
+        </div>
+        <h5 id="gewählteFächer" class="fächerZusammenfassung"></h5>
+      </div>
+      <p class="paragraphElements">
+        Bitte kontaktiert mich bei Fehlern der Website.
+      </p>
     </div>
     <script>
       document
@@ -576,6 +595,29 @@
           let successMsg = "";
 
           // Fächer aus allen Bändern sammeln
+          const chosenSubjects = [];
+          const subjectNames = {
+            DE: "Deutsch",
+            MA: "Mathematik",
+            EN: "Englisch",
+            FR: "Französisch",
+            LA: "Latein",
+            KU: "Kunst",
+            MU: "Musik",
+            DUG: "Darstellen und Gestalten",
+            GE: "Geschichte",
+            GG: "Geografie",
+            SK: "Sozialkunde",
+            WR: "Wirtschaft und Recht",
+            kar: "Katholische Religion",
+            evr: "Evangelische Religion",
+            BI: "Biologie",
+            CH: "Chemie",
+            PH: "Physik",
+            IN: "Informatik",
+            SP: "Sport",
+            SEMINAR: "Seminarfach",
+          };
 
           for (let i = 1; i <= 12; i++) {
             const selectedOption = form[`band${i}`]?.value;
@@ -584,6 +626,15 @@
                 errorMsg = `Doppelte Auswahl erkannt: ${selectedOption}. `;
               }
               selected[selectedOption] = true;
+              let subjectName = subjectNames[selectedOption] || selectedOption;
+              if (
+                form
+                  .querySelector(`input[name="band${i}"]:checked`)
+                  .nextElementSibling.classList.contains("eAN")
+              ) {
+                subjectName += " (eAN)";
+              }
+              chosenSubjects.push(subjectName);
             }
           }
 
@@ -592,7 +643,14 @@
             'input[type="radio"].eAN:checked'
           );
           if (selectedEAN.length !== 3) {
-            errorMsg = "Es müssen genau 3 eAN-Optionen ausgewählt werden! ";
+            errorMsg += "Es müssen genau 3 eAN-Optionen ausgewählt werden! ";
+          }
+
+          // Check if a subject is selected in the first 11 bands
+          for (let i = 1; i <= 11; i++) {
+            if (!form[`band${i}`]?.value) {
+              errorMsg = `In Band ${i} muss ein Fach ausgewählt werden! `;
+            }
           }
 
           // Display error or success message
@@ -604,6 +662,12 @@
             document.getElementById("errorMsg").textContent = "";
             document.getElementById("successMsg").textContent = successMsg;
           }
+
+          // Display chosen subjects
+          document.getElementById("gewählteFächer").textContent =
+            chosenSubjects.join(", ");
+          document.getElementById("gewählteFächerAnzeige").textContent =
+            "Gewählte Fächer: ";
         });
     </script>
   </body>
