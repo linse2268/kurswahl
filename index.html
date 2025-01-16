@@ -671,6 +671,11 @@
             }
           }
 
+          // Check if 'Geschichte' is selected anywhere
+          if (!selected.GE) {
+            errorMsg = "Geschichte muss ausgewählt werden! ";
+          }
+
           // Display error or success message
           if (errorMsg) {
             document.getElementById("errorMsg").textContent = errorMsg;
